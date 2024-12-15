@@ -19,12 +19,21 @@ def create_app():
         'script-src': ["'self'", "'unsafe-inline'"],
         'style-src': ["'self'", "'unsafe-inline'"],
     }
-    Talisman(app, content_security_policy=csp, force_https=False) #Disable HTTPS for local development , enable it in production
+
+    # Enable HTTPS in production, disable in development
+    if app.config.get("ENV") == "production":
+        Talisman(app, content_security_policy=csp)
+    else:
+        Talisman(app, content_security_policy=csp, force_https=False)
+
+    # Register Blueprints
     from .auth import auth_bp
     from .main import main_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
+    print(app.config["SQLALCHEMY_DATABASE_URI"])
+
 
     with app.app_context():
         db.create_all()

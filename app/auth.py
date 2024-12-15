@@ -50,10 +50,21 @@ def register():
         if User.query.filter_by(username=form.username.data).first():
             flash('Username already exists.', 'error')
         else:
-            new_user = User(username=form.username.data)
-            new_user.set_password(form.password.data)
-            db.session.add(new_user)
-            db.session.commit()
-            flash('Registration successful! You can now log in.', 'success')
-            return redirect(url_for('auth.login'))
+            try:
+                new_user = User(username=form.username.data)
+                new_user.set_password(form.password.data)
+                db.session.add(new_user)
+                db.session.commit()
+                flash('Registration successful! You can now log in.', 'success')
+                return redirect(url_for('auth.login'))
+            except Exception as e:
+                db.session.rollback()
+                flash('An error occurred during registration. Please try again.', 'error')
+                print(f"Database Error: {e}")  # Debugging database error
+    else:
+        # Debug validation errors
+        print(f"Form validation errors: {form.errors}")
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {field}: {error}", 'error')
     return render_template('register.html', form=form)
