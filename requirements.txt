@@ -4,4 +4,3 @@ Flask-SQLAlchemy
 Werkzeug
 flask-talisman
 flask-wtf
-Flask-Limiter
