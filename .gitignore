@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Flask instance folder
+instance/
+
+# SQLite database file
+*.db
+*.sqlite3
+
+# Environment variables
+.env
+
+# Docker
+*.log
+docker-compose.override.yml
+.env.*
+
+# Python virtual environment
+venv/
+env/
+.venv/
+
+# macOS
+.DS_Store
+
+# IDE specific
+.vscode/
+.idea/
+
+# Flask debug logs
+flask.log
+
