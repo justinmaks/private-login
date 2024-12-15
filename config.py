@@ -1,4 +1,7 @@
+import os
+
 class Config:
     SECRET_KEY = 'your-secret-key'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    ENV = os.getenv('FLASK_ENV', 'development')  # Default to development
