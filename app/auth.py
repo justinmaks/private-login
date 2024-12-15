@@ -17,9 +17,11 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
             login_user(user)
+            flash('Login successful!', 'success')
             return redirect(url_for('main.tools'))
-        flash('Invalid username or password')
+        flash('Invalid username or password. Please try again.', 'error')
     return render_template('login.html')
+
 
 @auth_bp.route('/logout')
 @login_required

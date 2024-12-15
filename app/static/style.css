@@ -85,3 +85,25 @@ a {
 a:hover {
     color: #148d3d;
 }
+
+/* Flash Messages */
+.flash-messages {
+    margin: 1em 0;
+}
+
+.flash {
+    padding: 1em;
+    margin-bottom: 0.5em;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.flash.success {
+    background-color: #1db954;
+    color: white;
+}
+
+.flash.error {
+    background-color: #d32f2f;
+    color: white;
+}
