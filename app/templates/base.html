@@ -8,9 +8,16 @@
 </head>
 <body>
     <nav>
-        <a href="/">Home</a>
-        <a href="/tools">Tools</a>
-        <a href="/logout">Logout</a>
+        <div class="nav-left">
+            <a href="/">Home</a>
+            <a href="/tools">Tools</a>
+            <a href="/logout">Logout</a>
+        </div>
+        <div class="nav-right">
+            {% if current_user.is_authenticated %}
+                <span>Hello, {{ current_user.username }}</span>
+            {% endif %}
+        </div>
     </nav>
     <div class="content">
         {% with messages = get_flashed_messages(with_categories=True) %}
@@ -26,5 +33,4 @@
         {% endblock %}
     </div>
 </body>
-
 </html>
