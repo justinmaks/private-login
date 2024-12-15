@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length
@@ -26,6 +26,10 @@ class RegisterForm(FlaskForm):
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        flash(f"Hello, {current_user.username}! You are already logged in.", "info")
+        return redirect(url_for('main.tools'))  # Redirect to a suitable page like /tools
+
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -45,6 +49,11 @@ def logout():
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
+
+    if current_user.is_authenticated:
+        flash(f"Hello, {current_user.username}! You are already logged in.", "info")
+        return redirect(url_for('main.tools'))  # Redirect to a suitable page like /tools
+
     form = RegisterForm()
     if form.validate_on_submit():
         if User.query.filter_by(username=form.username.data).first():
