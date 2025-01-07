@@ -2,6 +2,11 @@
 
 This is a basic Flask web application with user authentication and a protected tools page.
 
+
+## Demo
+
+https://stin.lol/
+
 ## Features
 - User registration and login
 - Protected tools page (accessible only to logged-in users)
